@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message = FALSE--------------------------------------
+## ---- echo = FALSE, message = FALSE-------------------------------------------
 library("rprime")
 library("knitr")
 opts_chunk$set(
@@ -7,7 +7,7 @@ opts_chunk$set(
   tidy = FALSE,
   collapse = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library("plyr")
 reduce_sails <- function(sails_path) {
   sails_lines <- read_eprime(sails_path)
@@ -37,15 +37,15 @@ reduce_sails <- function(sails_path) {
   sails
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 head(reduce_sails("data/SAILS/SAILS_001X00XS1.txt"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sails_paths <- list.files("data/SAILS/", pattern = ".txt", full.names = TRUE)
 sails_paths
 ensemble <- ldply(sails_paths, reduce_sails)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Score trials within subjects
 overall <- ddply(ensemble, .(Eprime.Basename, Running), summarise, 
                  Score = sum(CorrectResponse),
