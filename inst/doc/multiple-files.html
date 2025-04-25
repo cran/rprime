@@ -12,76 +12,107 @@
 
 <meta name="author" content="Tristan Mahr" />
 
-<meta name="date" content="2020-09-24" />
+<meta name="date" content="2025-04-25" />
 
 <title>Working with multiple files</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {  }
+{ }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -90,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -104,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -301,89 +340,101 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Working with multiple files</h1>
 <h4 class="author">Tristan Mahr</h4>
-<h4 class="date">2020-09-24</h4>
+<h4 class="date">2025-04-25</h4>
 
 
 
-<p>Suppose we want to load all the Eprime files in a directory and combine the results in dataframe.</p>
-<p>My strategy in this scenario is to figure out what I need to do for a single file and then wrap those steps in a function that takes a filepath to a txt file and returns a dataframe. After some exploration and interactive programming, I come up with the following function.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">&quot;plyr&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">reduce_sails &lt;-<span class="st"> </span><span class="cf">function</span>(sails_path) {</a>
-<a class="sourceLine" id="cb1-3" title="3">  sails_lines &lt;-<span class="st"> </span><span class="kw">read_eprime</span>(sails_path)</a>
-<a class="sourceLine" id="cb1-4" title="4">  sails_frames &lt;-<span class="st"> </span><span class="kw">FrameList</span>(sails_lines)</a>
-<a class="sourceLine" id="cb1-5" title="5">  </a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="co"># Trials occur at level 3</span></a>
-<a class="sourceLine" id="cb1-7" title="7">  sails_frames &lt;-<span class="st"> </span><span class="kw">keep_levels</span>(sails_frames, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb1-8" title="8">  sails &lt;-<span class="st"> </span><span class="kw">to_data_frame</span>(sails_frames)</a>
-<a class="sourceLine" id="cb1-9" title="9">  </a>
-<a class="sourceLine" id="cb1-10" title="10">  <span class="co"># Tidy up</span></a>
-<a class="sourceLine" id="cb1-11" title="11">  to_pick &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Eprime.Basename&quot;</span>, <span class="st">&quot;Running&quot;</span>, <span class="st">&quot;Module&quot;</span>, <span class="st">&quot;Sound&quot;</span>, </a>
-<a class="sourceLine" id="cb1-12" title="12">               <span class="st">&quot;Sample&quot;</span>, <span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Response&quot;</span>)</a>
-<a class="sourceLine" id="cb1-13" title="13">  sails &lt;-<span class="st"> </span>sails[to_pick]</a>
-<a class="sourceLine" id="cb1-14" title="14">  running_map &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">TrialLists =</span> <span class="st">&quot;Trial&quot;</span>, <span class="dt">PracticeBlock =</span> <span class="st">&quot;Practice&quot;</span>)</a>
-<a class="sourceLine" id="cb1-15" title="15">  sails<span class="op">$</span>Running &lt;-<span class="st"> </span>running_map[sails<span class="op">$</span>Running]</a>
-<a class="sourceLine" id="cb1-16" title="16">  </a>
-<a class="sourceLine" id="cb1-17" title="17">  <span class="co"># Renumber trials in the practice and experimental blocks separately.</span></a>
-<a class="sourceLine" id="cb1-18" title="18">  <span class="co"># Numerically code correct response.</span></a>
-<a class="sourceLine" id="cb1-19" title="19">  sails &lt;-<span class="st"> </span><span class="kw">ddply</span>(sails, .(Running), mutate, </a>
-<a class="sourceLine" id="cb1-20" title="20">                 <span class="dt">TrialNumber =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="kw">length</span>(Running)),</a>
-<a class="sourceLine" id="cb1-21" title="21">                 <span class="dt">CorrectResponse =</span> <span class="kw">ifelse</span>(Correct <span class="op">==</span><span class="st"> </span>Response, <span class="dv">1</span>, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb1-22" title="22">  sails<span class="op">$</span>Sample &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb1-23" title="23">  </a>
-<a class="sourceLine" id="cb1-24" title="24">  <span class="co"># Optionally, one might save the processed file via: </span></a>
-<a class="sourceLine" id="cb1-25" title="25">  <span class="co"># csv &lt;- paste0(file_path_sans_ext(sails_path), &quot;.csv&quot;)</span></a>
-<a class="sourceLine" id="cb1-26" title="26">  <span class="co"># write.csv(sails, csv, row.names = FALSE)</span></a>
-<a class="sourceLine" id="cb1-27" title="27">  sails</a>
-<a class="sourceLine" id="cb1-28" title="28">}</a></code></pre></div>
-<p>Here’s a preview of what the function returns when given a filepath.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">head</span>(<span class="kw">reduce_sails</span>(<span class="st">&quot;data/SAILS/SAILS_001X00XS1.txt&quot;</span>))</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt;   Eprime.Basename  Running Module     Sound Correct Response TrialNumber</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; 1 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           1</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; 2 SAILS_001X00XS1 Practice   LAKE  MAKE.WAV NotWord  NotWord           2</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; 3 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           3</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; 4 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           4</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; 5 SAILS_001X00XS1 Practice   LAKE  MAKE.WAV NotWord  NotWord           5</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; 6 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           6</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt;   CorrectResponse</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; 1               1</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 2               1</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 3               1</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 4               1</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 5               1</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 6               1</span></a></code></pre></div>
-<p>Now that the function works on one file, I can use <code>ldply</code> to apply the function to several files, returning results in a single dataframe. (For <code>dplyr</code>, I would <code>lapply</code> the function to each path to get a list of dataframes, then use <code>bind_rows</code> to combine into a single dataframe.)</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">sails_paths &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;data/SAILS/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;.txt&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">sails_paths</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] &quot;data/SAILS/SAILS_001X00XS1.txt&quot; &quot;data/SAILS/SAILS_002X00XS1.txt&quot;</span></a>
-<a class="sourceLine" id="cb3-4" title="4">ensemble &lt;-<span class="st"> </span><span class="kw">ldply</span>(sails_paths, reduce_sails)</a></code></pre></div>
-<p>Finally, with all of the subjects’ data contained in a single dataframe, I can use <code>ddply</code> plus <code>summarise</code> and compute summary scores at different levels of aggregation within each subject.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Score trials within subjects</span></a>
-<a class="sourceLine" id="cb4-2" title="2">overall &lt;-<span class="st"> </span><span class="kw">ddply</span>(ensemble, .(Eprime.Basename, Running), summarise, </a>
-<a class="sourceLine" id="cb4-3" title="3">                 <span class="dt">Score =</span> <span class="kw">sum</span>(CorrectResponse),</a>
-<a class="sourceLine" id="cb4-4" title="4">                 <span class="dt">PropCorrect =</span> Score <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(CorrectResponse))</a>
-<a class="sourceLine" id="cb4-5" title="5">overall</a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;   Eprime.Basename  Running Score PropCorrect</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; 1 SAILS_001X00XS1 Practice    10   1.0000000</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; 2 SAILS_001X00XS1    Trial    61   0.8714286</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 3 SAILS_002X00XS1 Practice     9   0.9000000</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 4 SAILS_002X00XS1    Trial    57   0.8142857</span></a>
-<a class="sourceLine" id="cb4-11" title="11"></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co"># Score modules within subjects</span></a>
-<a class="sourceLine" id="cb4-13" title="13">modules &lt;-<span class="st"> </span><span class="kw">ddply</span>(ensemble, .(Eprime.Basename, Running, Module), summarise, </a>
-<a class="sourceLine" id="cb4-14" title="14">                 <span class="dt">Score =</span> <span class="kw">sum</span>(CorrectResponse),</a>
-<a class="sourceLine" id="cb4-15" title="15">                 <span class="dt">PropCorrect =</span> <span class="kw">mean</span>(CorrectResponse))</a>
-<a class="sourceLine" id="cb4-16" title="16">modules</a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;    Eprime.Basename  Running Module Score PropCorrect</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 1  SAILS_001X00XS1 Practice   LAKE    10   1.0000000</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 2  SAILS_001X00XS1    Trial    CAT     9   0.9000000</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; 3  SAILS_001X00XS1    Trial   LAKE    10   1.0000000</span></a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt; 4  SAILS_001X00XS1    Trial    RAT    16   0.8000000</span></a>
-<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt; 5  SAILS_001X00XS1    Trial    SUE    26   0.8666667</span></a>
-<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 6  SAILS_002X00XS1 Practice   LAKE     9   0.9000000</span></a>
-<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; 7  SAILS_002X00XS1    Trial    CAT     8   0.8000000</span></a>
-<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; 8  SAILS_002X00XS1    Trial   LAKE    10   1.0000000</span></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; 9  SAILS_002X00XS1    Trial    RAT    11   0.5500000</span></a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt; 10 SAILS_002X00XS1    Trial    SUE    28   0.9333333</span></a></code></pre></div>
+<p>Suppose we want to load all the Eprime files in a directory and
+combine the results in dataframe.</p>
+<p>My strategy in this scenario is to figure out what I need to do for a
+single file and then wrap those steps in a function that takes a
+filepath to a txt file and returns a dataframe. After some exploration
+and interactive programming, I come up with the following function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;plyr&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>reduce_sails <span class="ot">&lt;-</span> <span class="cf">function</span>(sails_path) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  sails_lines <span class="ot">&lt;-</span> <span class="fu">read_eprime</span>(sails_path)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  sails_frames <span class="ot">&lt;-</span> <span class="fu">FrameList</span>(sails_lines)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="co"># Trials occur at level 3</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  sails_frames <span class="ot">&lt;-</span> <span class="fu">keep_levels</span>(sails_frames, <span class="dv">3</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  sails <span class="ot">&lt;-</span> <span class="fu">to_data_frame</span>(sails_frames)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="co"># Tidy up</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  to_pick <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eprime.Basename&quot;</span>, <span class="st">&quot;Running&quot;</span>, <span class="st">&quot;Module&quot;</span>, <span class="st">&quot;Sound&quot;</span>, </span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>               <span class="st">&quot;Sample&quot;</span>, <span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Response&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  sails <span class="ot">&lt;-</span> sails[to_pick]</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  running_map <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">TrialLists =</span> <span class="st">&quot;Trial&quot;</span>, <span class="at">PracticeBlock =</span> <span class="st">&quot;Practice&quot;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  sails<span class="sc">$</span>Running <span class="ot">&lt;-</span> running_map[sails<span class="sc">$</span>Running]</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="co"># Renumber trials in the practice and experimental blocks separately.</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  <span class="co"># Numerically code correct response.</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  sails <span class="ot">&lt;-</span> <span class="fu">ddply</span>(sails, .(Running), mutate, </span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>                 <span class="at">TrialNumber =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="fu">length</span>(Running)),</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>                 <span class="at">CorrectResponse =</span> <span class="fu">ifelse</span>(Correct <span class="sc">==</span> Response, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>  sails<span class="sc">$</span>Sample <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>  </span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>  <span class="co"># Optionally, one might save the processed file via: </span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  <span class="co"># csv &lt;- paste0(file_path_sans_ext(sails_path), &quot;.csv&quot;)</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  <span class="co"># write.csv(sails, csv, row.names = FALSE)</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>  sails</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>}</span></code></pre></div>
+<p>Here’s a preview of what the function returns when given a
+filepath.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">reduce_sails</span>(<span class="st">&quot;data/SAILS/SAILS_001X00XS1.txt&quot;</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt;   Eprime.Basename  Running Module     Sound Correct Response TrialNumber</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; 1 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           1</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; 2 SAILS_001X00XS1 Practice   LAKE  MAKE.WAV NotWord  NotWord           2</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; 3 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           3</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; 4 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           4</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 5 SAILS_001X00XS1 Practice   LAKE  MAKE.WAV NotWord  NotWord           5</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 6 SAILS_001X00XS1 Practice   LAKE LAKE1.WAV    Word     Word           6</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;   CorrectResponse</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 1               1</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 2               1</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 3               1</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 4               1</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; 5               1</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; 6               1</span></span></code></pre></div>
+<p>Now that the function works on one file, I can use <code>ldply</code>
+to apply the function to several files, returning results in a single
+dataframe. (For <code>dplyr</code>, I would <code>lapply</code> the
+function to each path to get a list of dataframes, then use
+<code>bind_rows</code> to combine into a single dataframe.)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>sails_paths <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;data/SAILS/&quot;</span>, <span class="at">pattern =</span> <span class="st">&quot;.txt&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>sails_paths</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;data/SAILS/SAILS_001X00XS1.txt&quot; &quot;data/SAILS/SAILS_002X00XS1.txt&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>ensemble <span class="ot">&lt;-</span> <span class="fu">ldply</span>(sails_paths, reduce_sails)</span></code></pre></div>
+<p>Finally, with all of the subjects’ data contained in a single
+dataframe, I can use <code>ddply</code> plus <code>summarise</code> and
+compute summary scores at different levels of aggregation within each
+subject.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Score trials within subjects</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>overall <span class="ot">&lt;-</span> <span class="fu">ddply</span>(ensemble, .(Eprime.Basename, Running), summarise, </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>                 <span class="at">Score =</span> <span class="fu">sum</span>(CorrectResponse),</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>                 <span class="at">PropCorrect =</span> Score <span class="sc">/</span> <span class="fu">length</span>(CorrectResponse))</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>overall</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;   Eprime.Basename  Running Score PropCorrect</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 1 SAILS_001X00XS1 Practice    10   1.0000000</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 2 SAILS_001X00XS1    Trial    61   0.8714286</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 3 SAILS_002X00XS1 Practice     9   0.9000000</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 4 SAILS_002X00XS1    Trial    57   0.8142857</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co"># Score modules within subjects</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>modules <span class="ot">&lt;-</span> <span class="fu">ddply</span>(ensemble, .(Eprime.Basename, Running, Module), summarise, </span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>                 <span class="at">Score =</span> <span class="fu">sum</span>(CorrectResponse),</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>                 <span class="at">PropCorrect =</span> <span class="fu">mean</span>(CorrectResponse))</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>modules</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;    Eprime.Basename  Running Module Score PropCorrect</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 1  SAILS_001X00XS1 Practice   LAKE    10   1.0000000</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 2  SAILS_001X00XS1    Trial    CAT     9   0.9000000</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 3  SAILS_001X00XS1    Trial   LAKE    10   1.0000000</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; 4  SAILS_001X00XS1    Trial    RAT    16   0.8000000</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; 5  SAILS_001X00XS1    Trial    SUE    26   0.8666667</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; 6  SAILS_002X00XS1 Practice   LAKE     9   0.9000000</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; 7  SAILS_002X00XS1    Trial    CAT     8   0.8000000</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; 8  SAILS_002X00XS1    Trial   LAKE    10   1.0000000</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; 9  SAILS_002X00XS1    Trial    RAT    11   0.5500000</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; 10 SAILS_002X00XS1    Trial    SUE    28   0.9333333</span></span></code></pre></div>
 
 
 

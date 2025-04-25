@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message = FALSE-------------------------------------------
+## ----echo = FALSE, message = FALSE--------------------------------------------
 library("rprime")
 library("knitr")
 opts_chunk$set(
@@ -8,8 +8,8 @@ opts_chunk$set(
   collapse = TRUE)
 options(str = strOptions(vec.len = 2))
 
-## ---- eval = FALSE------------------------------------------------------------
-#  install.packages("rprime")
+## ----eval = FALSE-------------------------------------------------------------
+# install.packages("rprime")
 
 ## -----------------------------------------------------------------------------
 library("rprime")
